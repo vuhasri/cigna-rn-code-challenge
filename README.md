@@ -4,7 +4,7 @@ For this code assessment, we expect you to make the changes listed in the `Deliv
 
 ## Setup
 
-Fork this repo and clone. Then run `npm i` to install neccessary packages. Make sure you are using the correct versions for ruby and node.
+Fork this repo and clone. Then run `npm i` to install neccessary packages. Make sure you have setup a [proper dev environment](https://reactnative.dev/docs/environment-setup).
 
 You will need to sign up for an OpenWeather API key. Instructions are here: https://openweathermap.org/appid
 
@@ -39,7 +39,7 @@ App crashes
    1. Match the design
       - A designer has provided a comp on how this app should look. Please see the `design.png` file.
         - To match the design you may need to use different fields that are returned from the OpenWeatherMap API. For example, the weather condition three digit code can be [mapped to the icons here](https://openweathermap.org/weather-conditions)
-      - Tailwindcss is installed and configured for you
+      - Tailwindcss is installed and configured for you. Open another terminal window and run `npm run tailwind-w`
    2. Provide correct the typing in the codebase. 
       - Currently, `any` is used throughout the code. Replace `any` with proper types.   
    3. Introduce `react-query` to the code. 

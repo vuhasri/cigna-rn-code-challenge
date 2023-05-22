@@ -1,8 +1,8 @@
 import 'react-native';
 import React from 'react';
-import {rest} from 'msw';
-import {setupServer} from 'msw/node';
-import {render} from '@testing-library/react-native';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import { render } from '@testing-library/react-native';
 import App from '../app';
 
 const server = setupServer(

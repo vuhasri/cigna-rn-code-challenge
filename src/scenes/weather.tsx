@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable} from 'react-native';
-import {useTailwind} from 'tailwind-rn';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Pressable } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
+import { useNavigation } from '@react-navigation/native';
 import WeatherInfo from '../components/weather-info';
 
 const Weather: React.FC = () => {
@@ -45,5 +45,5 @@ const Weather: React.FC = () => {
   );
 };
 
-export {Weather};
+export { Weather };
 export default Weather;

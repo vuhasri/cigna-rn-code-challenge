@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
-import {useTailwind} from 'tailwind-rn';
-import {fetchWeather} from '../api/get-weather';
+import React, { useEffect, useState } from 'react';
+import { View, Text } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
+import { fetchWeather } from '../api/get-weather';
 
-const WeatherInfo: React.FC<any> = ({location}) => {
+const WeatherInfo: React.FC<any> = ({ location }) => {
   const tw = useTailwind();
   const [data, setData] = useState<any>();
 

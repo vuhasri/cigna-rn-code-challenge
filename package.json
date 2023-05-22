@@ -3,15 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "npm run tailwindcss && npm run tailwindrn && react-native run-android",
-    "ios": "npm run tailwindcss && npm run tailwindrn && react-native run-ios",
+    "android": "npm run tailwind && react-native run-android",
+    "ios": "npm run tailwind && react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "tailwindrn": "tailwind-rn",
-    "tailwindcss": "tailwindcss -i input.css -o tailwind.css --no-autoprefixer",
-    "tailwindrn-w": "tailwind-rn --watch",
-    "tailwindcss-w": "tailwindcss -i input.css -o tailwind.css --no-autoprefixer --watch"
+    "tailwind": "tailwindcss -i input.css -o tailwind.css --no-autoprefixer && tailwind-rn",
+    "tailwind-w": "tailwindcss -i input.css -o tailwind.css --no-autoprefixer --watch && tailwind-rn --watch"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.6",

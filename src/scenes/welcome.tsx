@@ -1,7 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {View, Text, Pressable} from 'react-native';
-import {useTailwind} from 'tailwind-rn';
+import { View, Text, Pressable } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
 const Welcome: React.FC = () => {
   const tw = useTailwind();
@@ -22,5 +22,5 @@ const Welcome: React.FC = () => {
   );
 };
 
-export {Welcome};
+export { Welcome };
 export default Welcome;

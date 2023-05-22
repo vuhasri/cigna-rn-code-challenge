@@ -16,5 +16,5 @@ jest.mock('@react-navigation/native', () => {
 
 jest.mock('tailwind-rn', () => ({
   useTailwind: () => str => str,
-  TailwindProvider: ({children}) => children,
+  TailwindProvider: ({ children }) => children,
 }));
