@@ -13,7 +13,6 @@ const queryClient = new QueryClient();
 const WeatherInfo: React.FC<WeatherInfoProps> = ({ location }) => {
   const tw = useTailwind();
 
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   const getWeatherData = async (location: string) => {
     const results = await fetchWeather(location);
     return results;
