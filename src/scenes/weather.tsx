@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
-import { useNavigation } from '@react-navigation/native';
 import WeatherInfo from '../components/weather-info';
 
 const Weather: React.FC = () => {
   const tw = useTailwind();
 
-  const [input, setInput] = useState<any>();
-  const [location, setLocation] = useState<any>();
-
-  const navigation = useNavigation<any>();
+  const [input, setInput] = useState<string>('');
+  const [location, setLocation] = useState<string | undefined>();
 
   const onSubmit = () => {
     if (input !== '') {
@@ -18,32 +15,44 @@ const Weather: React.FC = () => {
     }
   };
 
-  const navigateToWelcomeScreen = () => {
-    navigation.goBack();
-  };
-
   return (
-    <View style={tw('flex-1 max-w-sm justify-center items-center p-1')}>
-      <Text style={tw('text-2xl font-bold mb-4')}>Weather Search</Text>
-      <TextInput
-        style={tw('bg-white rounded-lg px-4 py-2 w-1/2 mb-4')}
-        placeholder="Enter a location"
-        value={input}
-        onChangeText={setInput}
-      />
-      <Pressable
-        style={tw('bg-blue-500 rounded-lg px-4 py-2')}
-        onPress={onSubmit}
-        disabled={input === ''}>
-        <Text style={tw('text-white font-bold')}>Get Weather</Text>
-      </Pressable>
+    <View style={tw('flex-1 max-w-sm  items-center p-1')}>
+      <View style={styles.container}>
+        <Text style={styles.searchText}>Weather Search:</Text>
+        <TextInput
+          style={tw('bg-white rounded-lg-location-input px-4 py-2 w-1/3 mb-4')}
+          placeholder=""
+          value={input}
+          onChangeText={setInput}
+        />
+        <Pressable
+          style={tw('bg-blue-500 rounded-lg-submit px-4 py-2 mb-4')}
+          onPress={onSubmit}
+          disabled={input === ''}>
+          <Text style={styles.submit}>SUBMIT</Text>
+        </Pressable>
+      </View>
+
       {location && <WeatherInfo location={location} />}
-      <Pressable style={tw('mt-8')} onPress={navigateToWelcomeScreen}>
-        <Text style={tw('text-blue-500 font-bold')}>Go Back</Text>
-      </Pressable>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: { flexDirection: 'row', marginTop: 20 },
+  searchText: {
+    fontWeight: '500',
+    fontSize: 15,
+    color: 'black',
+    marginRight: 10,
+    marginTop: 10,
+  },
+  submit: {
+    color: 'white',
+    fontWeight: '700',
+    paddingTop: 4,
+  },
+});
 
 export { Weather };
 export default Weather;

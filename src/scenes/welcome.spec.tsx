@@ -1,24 +1,27 @@
-import 'react-native';
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react-native';
-import App from '../app';
+import { render, fireEvent } from '@testing-library/react-native';
+import { useNavigation } from '@react-navigation/native';
+import Welcome from './Welcome';
 
-const mockNavigation = jest.fn();
+// Mock the useNavigation hook
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: jest.fn(),
+}));
 
-jest.mock('@react-navigation/native', () => {
-  const actualNav = jest.requireActual('@react-navigation/native');
-  return {
-    ...actualNav,
-    useNavigation: () => ({
-      navigate: mockNavigation,
-    }),
-  };
-});
+describe('Welcome component', () => {
+  it('navigates to the Weather screen when the button is pressed', () => {
+    // Mock the navigate function from useNavigation
+    const navigateMock = jest.fn();
+    useNavigation.mockReturnValue({ navigate: navigateMock });
 
-describe('weather app', () => {
-  it('navigates to weather screen', () => {
-    const screen = render(<App />);
-    fireEvent.press(screen.getByText('Show me the weather'));
-    expect(mockNavigation).toHaveBeenCalledWith('weather');
+    const { getByText } = render(<Welcome />);
+
+    const buttonElement = getByText('Show me the weather');
+
+    // Simulate button press
+    fireEvent.press(buttonElement);
+
+    // Check if navigate function is called with the correct screen name
+    expect(navigateMock).toHaveBeenCalledWith('weather');
   });
 });

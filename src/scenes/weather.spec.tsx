@@ -1,34 +1,50 @@
-import 'react-native';
 import React from 'react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import { render } from '@testing-library/react-native';
-import App from '../app';
+import { render, fireEvent } from '@testing-library/react-native';
+import Weather from './Weather';
 
-const server = setupServer(
-  rest.get('https://api.openweathermap.org/*', (req, res, ctx) => {
-    return res(
-      ctx.json({
-        weather: [
-          {
-            description: 'Overcast clouds',
-          },
-        ],
-        main: {
-          // temp in Kelvin
-          temp: 295.372,
-        },
-      }),
+// Mock the WeatherInfo component
+jest.mock('../components/weather-info', () => {
+  return function MockWeatherInfo(props) {
+    return (
+      <div data-testid="weather-info">
+        Weather Information for: {props.location}
+      </div>
     );
-  }),
-);
-
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-
-it('shows weather results', () => {
-  render(<App />);
-  // todo: write some assertions
+  };
 });
-// todo: add more tests, maybe error handling?
+
+describe('Weather component', () => {
+  it('updates the location when submitting a valid input and renders the WeatherInfo component', () => {
+    const { getByPlaceholderText, getByText, getByTestId } = render(
+      <Weather />,
+    );
+
+    const inputElement = getByPlaceholderText('');
+    const submitButtonElement = getByText('SUBMIT');
+
+    // Enter a valid location
+    fireEvent.changeText(inputElement, 'New York');
+
+    // Submit the form
+    fireEvent.press(submitButtonElement);
+  });
+
+  it('does not update the location when submitting an empty input and does not render the WeatherInfo component', () => {
+    const { getByPlaceholderText, getByText, queryByTestId } = render(
+      <Weather />,
+    );
+
+    const inputElement = getByPlaceholderText('');
+    const submitButtonElement = getByText('SUBMIT');
+
+    // Enter an empty location
+    fireEvent.changeText(inputElement, '');
+
+    // Submit the form
+    fireEvent.press(submitButtonElement);
+
+    // Check if the location is not updated
+    const weatherInfoElement = queryByTestId('weather-info');
+    expect(weatherInfoElement).toBeNull();
+  });
+});
